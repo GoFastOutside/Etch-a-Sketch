@@ -1,34 +1,37 @@
-const size =16;
-let arrayOfRows=[];
 const gridDiv=document.querySelector(".grid-box");
+drawGrid(16);
 
 
-for (let y = 0; y<size;y++){
-    
-//create div element for the row
-    const rowDiv = document.createElement('div');//`id="row${y}"`,'class="row"');
-    rowDiv.classList.add('row');
-    rowDiv.id=`row${y}`;
-    //store in arrayOfRows
-    
-    //add to DOM
-    gridDiv.appendChild(rowDiv);
-
-    for (let x = 0; x<size;x++){
-        const rowItem = document.createElement('div');//,`id="${x},${y}"`,'class="row-item"')
-        rowItem.classList.add('row-item');
-        rowItem.id=`${x}, ${y}`;
-       rowItem.addEventListener('mouseleave',mark);
-       //rowItem.textContent=   x + ", " + y; 
-
-        //create div element for row item
-             //store in in arrayOfRows
-                //add to DOM
-        rowDiv.appendChild(rowItem);
-
+const resizeButton = document.querySelector('#size');
+resizeButton.addEventListener('click',function(){
+    let size= +prompt("enter grid size");
+    if (!Number.isInteger(size) && (size>100 || size<1) ){
+        alert("invalid input");
+        return;
     }
+    drawGrid(size);
+    
+});
 
 
+function drawGrid(size){
+    gridDiv.innerHTML="";
+    for (let y = 0; y<size;y++){
+        
+    //create div element for the row
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('row');
+        rowDiv.id=`row${y}`;
+        gridDiv.appendChild(rowDiv);
+
+        for (let x = 0; x<size;x++){
+            const rowItem = document.createElement('div');
+            rowItem.classList.add('row-item');
+            rowItem.id=`${x}, ${y}`;
+            rowItem.addEventListener('mouseleave',mark);
+            rowDiv.appendChild(rowItem);
+        }
+    }
 }
 
 function mark(e){

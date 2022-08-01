@@ -1,8 +1,10 @@
 body{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 
 }
+
 .grid-box{
     display: flex;
     border:10 black solid;
